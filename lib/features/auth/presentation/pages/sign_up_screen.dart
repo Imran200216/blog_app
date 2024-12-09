@@ -1,7 +1,10 @@
+import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_btn.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_fields.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_text_btn.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -79,7 +82,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 40,
               ),
               AuthBtn(
-                onTap: () {},
+                onTap: () {
+                  (formKey.currentState!.validate())
+                      ? context.read<AuthBloc>().add(AuthSignUp(
+                            name: nameController.text.trim(),
+                            password: passwordController.text.trim(),
+                            email: emailController.text.trim(),
+                          ))
+                      : null;
+                },
                 btnTitle: "Sign Up",
               ),
               const SizedBox(
@@ -95,7 +106,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   AuthTextBtn(
                     btnText: "Sign In",
-                    onTap: () {},
+                    onTap: () {
+                      GoRouter.of(context).pushNamed("loginInScreen");
+                    },
                   ),
                 ],
               ),

@@ -2,6 +2,7 @@ import 'package:blog_app/features/auth/presentation/widgets/auth_btn.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_fields.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_text_btn.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -71,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               AuthBtn(
                 onTap: () {},
-                btnTitle: "Sign Up",
+                btnTitle: "Sign In",
               ),
               const SizedBox(
                 height: 20,
@@ -85,8 +86,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   AuthTextBtn(
-                    btnText: "Sign In",
-                    onTap: () {},
+                    btnText: "Sign Up",
+                    onTap: () {
+                      GoRouter.of(context).pushNamed("signUpScreen");
+                    },
                   ),
                 ],
               ),
